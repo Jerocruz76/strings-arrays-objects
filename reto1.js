@@ -1,33 +1,57 @@
-const first3UserList = []
+
 let userObj = {}
+const userNames = []
+const usersList2 = []
 
 const domain = "@myDomain.com"
 
 while(confirm("Deseas agregar un usuario?")){
-    let userName = prompt("Ingresa tu nombre y tu apellido").toLowerCase(); // juan perez
-    var splitedArray = userName.split(" "); // ["juan", "perez"]
+    
+    let userName = prompt("Ingresa tu nombre y tu apellido").toLowerCase();
+    let splitedArray = userName.split(" ");
+    let cominedName = ''
     splitedArray.forEach(Element => {
         let elementSlice = Element.slice(0,3)
-        first3UserList.push({
-            letters3Element: elementSlice
-        })
+        
+        cominedName += elementSlice
     });
-    let usuario = first3UserList.join("") // [nombre, apellido] -> nombreapellido, nombreapellido nombreapellido, 
-    let userEmail = usuario.concat(domain) // nombreapellido@myDomain.com
-    userObj = {
-        [userEmail] : usuario
-    }// userObj user : userEmail 
-    const keys = Object.keys(userObj) // users
-    console.log(first3UserList);
-    keys.forEach(e => console.log(e))
-    console.log(usuario)
-    /* let isIncluded = keys.includes(usuario)
+    console.log(typeof cominedName)
+    userNames.push(cominedName)
+    let usuarioCompleto = userNames.map(function(user){
+        return user + domain
+    })
+    let objUnico = {}
+
+    // userNames.forEach((element, idx) => {
+    //     objUnico = {
+    //         [element]: usuarioCompleto[idx]
+    //     }
+    //     console.log(objUnico);
+    // }); 
+    objUnico={
+
+        [userNames[userNames.length-1]] : usuarioCompleto[usuarioCompleto.length-1] 
+    }
+    usersList2.push(objUnico)
+    console.log(usersList2)
+    
+}
+
+
+
+console.log(userObj)
+console.log(userNames)
+console.log(usersList2)
+
+
+
+
+/* let isIncluded = keys.includes(usuario)
     console.log(isIncluded)
     if (isIncluded=true){
         let nuevoUsuario = usuario + '1'
         alert(`Este usuario ya está en uso, te recomiendo usar: ${nuevoUsuario}`)
     } */
-}
 
 
 
