@@ -14,20 +14,19 @@ while(confirm("Deseas agregar un usuario?")){
         let elementSlice = Element.slice(0,3)
         
         cominedName += elementSlice
-    });
-    console.log(typeof cominedName)
+    }); 
     userNames.push(cominedName)
     let usuarioCompleto = userNames.map(function(user){
         return user + domain
     })
     let objUnico = {}
 
-    // userNames.forEach((element, idx) => {
-    //     objUnico = {
-    //         [element]: usuarioCompleto[idx]
-    //     }
-    //     console.log(objUnico);
-    // }); 
+    userNames.forEach((element, idx) => {
+        objUnico = {
+            [element]: usuarioCompleto[idx]
+        }
+        
+    }); 
     objUnico={
 
         [userNames[userNames.length-1]] : usuarioCompleto[usuarioCompleto.length-1] 
