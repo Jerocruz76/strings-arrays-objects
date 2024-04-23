@@ -8,19 +8,19 @@ function passwordValidation(pass) {
     const regexUpperCase = new RegExp(/[A-Z]/)
     const regexCharacter = new RegExp(/[!@#$%^&*()_+=-{}\[\]:;\"'<>,./|\~`]/)
     if (!regexLenght.test(pass)){
-        console.log("al menos 8 caracteres")
+        alert("al menos 8 caracteres")
     }
     if (!regexNumber.test(pass)){
-        console.log("al menos un número")
+        alert("al menos un número")
     }
     if (!regexLetter.test(pass)){
-        console.log("al menos una minúscula")
+        alert("al menos una minúscula")
     }
     if (!regexUpperCase.test(pass)){
-        console.log("al menos una mayúscula")
+        alert("al menos una mayúscula")
     }
     if (!regexCharacter.test(pass)){
-        console.log("al menos un caracter especial")
+        alert("al menos un caracter especial")
     }
 }
 
