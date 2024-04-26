@@ -1,84 +1,79 @@
-let i = true
-const eventList = []
-let id = 0;
-while (i) {
-    // Sistema de gestion de eventos
+let a = true
+let listaEvento = []
+let idEvent = 1
 
-    const userInput = prompt(`Por favor ingresa una de las siguientes opciones: 
-                            \n 1. Crear un evento 
-                            \n 2. Ver eventos
-                            \n 3. Buscar eventos por nombre
-                            \n 4. Actualizar evento
-                            \n 5. Eliminar evento
-                            \n 6. Salir`);
-    switch (userInput) {
-        case "1":
-            const eventName = prompt("Por favor ingresa el nombre del evento: ");
-            const eventDate = prompt("Por favor ingresa la fecha del evento (YYYY-MM-DD): ");
-            const eventDescription = prompt("Por favor ingresa la descripcion del evento: ");
-            const event = Object.assign({}, {
-                id: ++id, // incrementamos el id
-                eventName, // lo mismo que eventName: eventName
-                eventDate, // lo mismo que eventDate: eventDate
-                eventDescription // lo mismo que eventDescription: eventDescription
-            })
+function crearEvento(){
+    let eventName = prompt("Ingresa el nombre del evento").toLowerCase()
+    let date = prompt("Ingresa la fecha en formato: DD-MM-AAAA")
+    let description = prompt("Ingresa la descripcion del evento").toLowerCase() 
+    let evento = {
+        id: idEvent++,
+        nombre: eventName,
+        fecha: date,
+        descripcion: description
+    }
+    listaEvento.push(evento)
+    alert("Evento agregado")
+}
 
-            eventList.push(event);
-            break;
-        case "2":
-            eventList.forEach((event, index) => {
-                console.log(`Evento ${index + 1}: ${event.eventName} - ${event.eventDate} - ${event.eventDescription}`);
-            });
-            break;
-        case "3":
-            const search = prompt("Por favor ingresa el nombre del evento que deseas buscar: ");
-            const foundEvents = eventList.filter(event => event.eventName === search);
-            if (foundEvents.length === 0) {
-                console.log("No se encontraron eventos con ese nombre");
-                break;
-            }
-            foundEvents.forEach((event, index) => {
-                console.log(`Evento ${index + 1}: ${event.eventName} - ${event.eventDate} - ${event.eventDescription}`);
-            });
-            break;
-        case "4":
-            // primero mostramos todos los eventos para visualizar el id
-            eventList.forEach((event, index) => {
-                console.log(`Evento ${index + 1}: ${event.eventName} - ${event.eventDate} - ${event.eventDescription}`);
-            });
-            // luego pedimos el id del evento a actualizar
-            const eventId = prompt("Por favor ingresa el id del evento que deseas actualizar: ");
-            // luego pedimos los nuevos datos
-            const eventNameUpdated = prompt("Por favor ingresa el nombre del evento o enter si deseas mantener el mismo: ");
-            const eventDateUpdated = prompt("Por favor ingresa la fecha del evento o enter si deseas mantener la misma: ");
-            const eventDescriptionUpdated = prompt("Por favor ingresa la descripcion del evento o enter si deseas mantener la misma: ");
-            // actualizamos el evento
-            if (eventNameUpdated) {
-                eventList[eventId - 1].eventName = eventNameUpdated;
-            }
-            if (eventDateUpdated) {
-                eventList[eventId - 1].eventDate = eventDateUpdated;
-            }
-            if (eventDescriptionUpdated) {
-                eventList[eventId - 1].eventDescription = eventDescriptionUpdated;
-            }
-            break;
-        case "5":
-            // primero mostramos todos los eventos para visualizar el id
-            eventList.forEach((event, index) => {
-                console.log(`Evento ${index + 1}: ${event.eventName} - ${event.eventDate} - ${event.eventDescription}`);
-            });
-            // luego pedimos el id del evento a eliminar
-            const eventIdToDelete = prompt("Por favor ingresa el id del evento que deseas eliminar: ");
-            // eliminamos el evento
-            // eventList = eventList.filter((event, index) => index !== eventIdToDelete - 1);
-            eventList.splice(eventIdToDelete - 1, 1);
-            break;
-        case "6":
-            i = false;
-            break;
-        default:
-            break;
+function visualizarEvento(){
+    let opcionBusqueda = parseInt(prompt("Ingresa 1 para visualizar los eventos o 2 para buscar un evento por nombre"))
+    if(opcionBusqueda === 1){
+    alert(`Éstos son los eventos ${JSON.stringify(listaEvento)}`)
+    }
+    else if(opcionBusqueda === 2){
+    let searchName = prompt("Ingresa el nombre del evento").toLowerCase()
+    let findEvent = listaEvento.find(e => e.nombre === searchName)
+    if(findEvent){
+        alert(JSON.stringify(findEvent))
+    }else{
+        alert("Ese evento no ha sido creado")
     }
 
+    }
+}
+
+function actualizarEvento(){
+    let eventoActualizar = prompt("Ingrese el nombre del evento que desea actualizar").toLowerCase()
+    let findName = listaEvento.find(e => e.nombre === eventoActualizar)
+    if(findName){
+        let newName = prompt("Ingrese el nuevo nombre")
+        findName.nombre = newName
+        let newDate = prompt("Ingrese la nueva fecha")
+        findName.fecha = newDate
+        let newDescription = prompt("Ingresa una nueva descripción")
+        findName.descripcion = newDescription
+    }
+    console.log(listaEvento)
+
+}
+
+function eliminarEvento(){
+    let eventoEliminar = prompt("Ingrese el nombre del evento que desea eliminar").toLowerCase()
+    listaEvento = listaEvento.filter(e => e.nombre !== eventoEliminar)
+}
+
+while(a){
+    const menu = parseInt(prompt(`Ingresa la opción que desees:
+                        \n 1. Ingresar un nuevo evento
+                        \n 2. Visualizar eventos o buscar evento por nombre
+                        \n 3. Actualizar un evento
+                        \n 4. Eliminar un evento
+                        \n 5. Salir`))
+    switch(menu){
+        case 1:
+            crearEvento()
+            break
+        case 2:
+            visualizarEvento()
+            break
+        case 3:
+            actualizarEvento()
+            break
+        case 4:
+            eliminarEvento()
+            break
+        case 5:
+            a = false
+    }
 }
