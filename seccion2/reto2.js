@@ -6,4 +6,9 @@ arrayNotas = arrayNotas.map(num => parseInt(num))
 
 const promedio = arrayNotas.reduce((e,n) => e+n/arrayNotas.length, 0)
 
-Math.max(arrayNotas)
+let numeroMayor = (Math.max(arrayNotas))
+let numeroMenor = (Math.min(arrayNotas))
+
+alert(`la nota más baja es ${numeroMenor}`)
+alert(`la nota más alta es ${numeroMayor}`)
+
