@@ -43,9 +43,9 @@ function actualizarEvento(){
         findName.fecha = newDate
         let newDescription = prompt("Ingresa una nueva descripción")
         findName.descripcion = newDescription
+    }else{
+        alert("Este evento no ha sido creado aún")
     }
-    console.log(listaEvento)
-
 }
 
 function eliminarEvento(){
