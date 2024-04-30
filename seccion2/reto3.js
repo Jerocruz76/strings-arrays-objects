@@ -122,9 +122,10 @@ function buyProduct(){
 }
 
 function calcInventoryPrices(){
-    let total = (n,m) => {
-        
-    }
+    let total = arrayProduct.reduce((totalP,product)=>{
+        return total + (product.precio * product.cantidad)
+    })
+    alert(`El total de los precios es ${total}`)
 }
 
 function orderProductsMaxMin(){
@@ -135,6 +136,54 @@ function orderProductsMaxMin(){
         arrayProduct = arrayProduct.sort((a, b) => a - b)
     }else{
         alert("Esa no es una opción")
+    }
+}
+
+while(i){
+    const menu = parseInt(prompt(`Ingresa una opción:
+                           \n 1. Agregar un producto
+                           \n 2. Duplicar productos
+                           \n 3. Visualizar productos
+                           \n 4. Actualizar productos
+                           \n 5. Eliminar producto
+                           \n 6. Vender producto
+                           \n 7. Comprar producto
+                           \n 8. Total de precios en productos
+                           \n 9. Ordenar productos
+                           \n 10. Salir`))
+    switch(menu){
+        case 1:
+            createProduct()
+            break
+        case 2:
+            duplicateProduct()
+            break
+        case 3:
+            searchAndVisualizeProducts()
+            break
+        case 4:
+            uploadProducts()
+            break
+        case 5:
+            deleteProduct()
+            break
+        case 6:
+            sellProduct()
+            break
+        case 7:
+            buyProduct()
+            break
+        case 8:
+            calcInventoryPrices()
+            break
+        case 9:
+            orderProductsMaxMin()
+            break
+        case 10:
+            i = false
+            break
+        case undefined:
+            alert("Esa no es una opción")
     }
 }
 
