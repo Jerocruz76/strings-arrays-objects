@@ -1,12 +1,14 @@
 let i = true
 const arrayProduct = []
 let productCont = 1
+const blacklistedWords = ['puta', 'marica', 'guevon', 'mierda', 'chimba', 'carechimba', 'hijueputa', 'malparido', 'malparida']
 
 function createProduct(){
     const productName = prompt("Ingresa el nombre del producto").toLowerCase()
     const productPrice = Number(prompt("Ingresa el precio del producto"))
     const productQuantity = Number(prompt("Ingresa la cantidad del producto"))
     const productDescription = prompt("Ingresa la descripción del producto")
+    const nameArray = productDescription.split(" ")
     const product = {
         id: productCont++,
         nombre: productName,
@@ -15,13 +17,35 @@ function createProduct(){
         descripcion: productDescription
     }
     arrayProduct.push(product)
+    const newName =[];
     alert("El producto fué agregado")
+    nameArray.forEach(e => {
+        let word = e;
+        blacklistedWords.forEach(badword => {
+            if(badword===e){
+                word='*'
+            }
+        });
+        newName.push(word)
+        alert("Aquí hay una mala palabra")
+    })
+    let stringNewName =''
+    newName.forEach(element => {
+        stringNewName += element;
+        stringNewName += " "
+    });
 }
 
 function duplicateProduct(){
-    const productToDuplicate = Number(prompt("Ingrese el id del producto que desea duplicar"))
-    const productCopy ={...arrayProduct[productToDuplicate]}
-    arrayProduct.push(productCopy);
+    let duplicateCont = 1
+    let newProduct = structuredClone(idDuplicate)
+    newProduct.id = id++
+    newProduct.nombre += " copy"
+    arrayProduct.forEach(function(e){
+        if(product.nombre == `${newProduct.name} ${duplicateCont}`){
+            duplicateCont++
+        }
+    })
 }
 
 function searchAndVisualizeProducts(){
@@ -74,7 +98,7 @@ function sellProduct(){
     const productToSell = prompt("Ingresa el nombre del produto que deseas vender")
     const findProduct = arrayProduct.find(e => e.nombre === productToSell)
     if(findProduct){
-        const productToSellQuantity = Number(prompt("Ingresa la cantidad del producto que vas a vender"))
+        const productToSellQuantity = parseInt(prompt("Ingresa la cantidad del producto que vas a vender"))
         // let quantity = arrayProduct.find(e => e.cantidad -= productToSellQuantity)
         if(productToSellQuantity > findProduct.cantidad){
             alert("No tienes tanta cantidad")
@@ -83,6 +107,34 @@ function sellProduct(){
         }else{
             findProduct.cantidad -= productToSellQuantity
         }
+    }
+}
+
+function buyProduct(){
+    const productToBuy = prompt("Ingresa el nombre del producto dentro de tu lista que deseas comprar")
+    const findProduct = arrayProduct.find(e => e.nombre === productToBuy)
+    if(findProduct){
+        const productToBuyQuantity = parseInt(prompt("Ingresa la cantidad del producto que vas a comprar"))
+        findProduct.cantidad += productToBuyQuantity
+    }else{
+        alert("Aún no tienes éste producto")
+    }
+}
+
+function calcInventoryPrices(){
+    let total = (n,m) => {
+        
+    }
+}
+
+function orderProductsMaxMin(){
+    const order = prompt("Ingresa el orden que deseas: 1. Mayor a menor 2. Menor a mayor")
+    if(order === 1){
+        arrayProduct = arrayProduct.sort((a, b) => b - a)
+    }else if(order === 2){
+        arrayProduct = arrayProduct.sort((a, b) => a - b)
+    }else{
+        alert("Esa no es una opción")
     }
 }
 
